@@ -33,6 +33,10 @@ function displayField(fieldValue) {
     const graduatesGrid = document.getElementById('graduatesGrid');
   
     students.forEach((student) => {
+      // Extract the student's ID (must be unique in the JSON!)
+      // We'll assume it's stored as "id": 1, "id": 2, etc.
+      const studentId = student.id;  // e.g. 1, 2, 3, ...
+      
       // Extract relevant fields
       const studentName = displayField(student[" Name"]);
       const citizenship = displayField(student["Citizenship"]);
@@ -43,17 +47,16 @@ function displayField(fieldValue) {
       const university = displayField(student["University"]);
       const country    = displayField(student["Country"]);
   
-      // Determine image path from the first word of studentName
-      // E.g. if studentName = "Dala Nedal Kasaba", firstName = "Dala"
-      let imagePath = 'https://via.placeholder.com/200';  // fallback
-      const nameParts = studentName.split(/\s+/); // split on whitespace
-      if (nameParts && nameParts[0] && nameParts[0] !== "N/A") {
-        const firstName = nameParts[0];
-        // Build the path like: img/Dala.jpg
-        // You can force it to lower-case if needed:
-        // const firstName = nameParts[0].toLowerCase();
-        imagePath = `Img/${firstName}.jpg`;
-      }
+      // Build image path based on the student's unique ID
+      // For example: "img/1.jpg", "img/2.jpg", etc.
+      // If you don't have a matching file, fallback to placeholder.
+      let imagePath = `img/${studentId}.jpg`;
+  
+      // If you haven't uploaded that image, you can check 
+      // whether it exists or fallback. For simplicity, 
+      // we'll just assume each ID has a corresponding image 
+      // in "img/<id>.jpg". If not, you can do a try/catch 
+      // or an onerror fallback.
   
       // Create the outer column
       const colDiv = document.createElement('div');
@@ -87,7 +90,7 @@ function displayField(fieldValue) {
   
       // Create an <img> for the card
       const img = document.createElement('img');
-      img.src = imagePath;
+      img.src = imagePath;                 // "img/<id>.jpg"
       img.alt = studentName;
       img.className = 'card-img-top student-img mx-auto mt-3';
   
@@ -113,9 +116,8 @@ function displayField(fieldValue) {
     4) Fill the modal with the clicked student's details
   ****************************************************/
   function showStudentDetails(student) {
-    // If we have a valid imagePath, use it; otherwise fallback
     const modalImg = document.getElementById('modalStudentImg');
-    modalImg.src = student.imagePath || 'https://via.placeholder.com/200';
+    modalImg.src = student.imagePath;
     modalImg.alt = student.name;
   
     // Fill text fields
