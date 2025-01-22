@@ -52,7 +52,7 @@ function displayField(fieldValue) {
         // Build the path like: img/Dala.jpg
         // You can force it to lower-case if needed:
         // const firstName = nameParts[0].toLowerCase();
-        imagePath = `./img/${firstName}.jpg`;
+        imagePath = `img/${firstName}.jpg`;
       }
   
       // Create the outer column
