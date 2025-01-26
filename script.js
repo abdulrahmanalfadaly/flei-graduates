@@ -17,14 +17,95 @@ function displayField(fieldValue) {
 ****************************************************/
 window.onload = () => {
   fetch('student_info.json')
-      .then(response => response.json())
-      .then(data => {
-          generateCards(data);
-      })
-      .catch(error => {
-          console.error("Error fetching student_info.json:", error);
-      });
+    .then(response => response.json())
+    .then(data => {
+      const highschoolStudents = data.filter(student => !student.Program || student.Program.trim() === "");
+      const programStudents = data.filter(student => student.Program && student.Program.trim() !== "");
+
+      generateCards(programStudents);
+      generateHighschoolCards(highschoolStudents);
+    })
+    .catch(error => {
+      console.error("Error fetching student_info.json:", error);
+    });
 };
+
+function generateHighschoolCards(students) {
+  const graduatesGrid = document.getElementById('graduatesGrid');
+
+  const highschoolSection = document.createElement('section');
+  highschoolSection.className = "pt-4 pb-5";
+  highschoolSection.id = "highschoolSection";
+
+  const container = document.createElement('div');
+  container.className = "container";
+
+  const header = document.createElement('h2');
+  header.className = "text-center mb-4";
+  header.innerText = "Highschool Students";
+
+  const row = document.createElement('div');
+  row.className = "row g-4";
+
+  students.forEach((student) => {
+    const studentId = student.id;
+    const studentName = displayField(student[" Name"]);
+    const citizenship = displayField(student["Citizenship"]);
+    const residence = displayField(student["Country of residence"]);
+    const program = displayField(student["Program"]);
+    const university = displayField(student["University"]);
+    const country = displayField(student["Country"]);
+    let imagePath = `img/${studentId}.jpg`;
+
+    const colDiv = document.createElement('div');
+    colDiv.className = 'col-6 col-md-4 col-lg-3 graduate-card';
+
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card text-center h-100';
+
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.className = 'text-decoration-none text-dark btn p-0 border-0 bg-transparent';
+    link.setAttribute('data-bs-toggle', 'modal');
+    link.setAttribute('data-bs-target', '#studentModal');
+
+    link.onclick = () => {
+      showStudentDetails({
+        name: studentName,
+        citizenship,
+        residence,
+        program,
+        university,
+        country,
+        imagePath,
+      });
+    };
+
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = studentName;
+    img.className = 'card-img-top student-img mx-auto mt-3';
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+
+    const cardTitle = document.createElement('h5');
+    cardTitle.className = 'card-title graduate-name';
+    cardTitle.innerText = studentName;
+
+    cardBody.appendChild(cardTitle);
+    link.appendChild(img);
+    link.appendChild(cardBody);
+    cardDiv.appendChild(link);
+    colDiv.appendChild(cardDiv);
+    row.appendChild(colDiv);
+  });
+
+  container.appendChild(header);
+  container.appendChild(row);
+  highschoolSection.appendChild(container);
+  document.body.appendChild(highschoolSection);
+}
 
 /***************************************************
 3) Generate Bootstrap cards in #graduatesGrid
