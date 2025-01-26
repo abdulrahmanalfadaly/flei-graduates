@@ -28,6 +28,18 @@
       object-fit: cover;
     }
 
+    @media (max-width: 576px) {
+  header {
+    /* Make the header fill the entire phone screen height */
+    min-height: 100vh !important;
+    
+    /* Enable flex layout to center child elements vertically */
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
     
   </style>
 </head>
@@ -47,20 +59,24 @@
     <!-- Navbar brand/logo -->
     <nav class="navbar navbar-dark px-4">
       <div class="navbar-brand z-2 fw-bold fs-3">
+        <a href="#searchSection">
         <img src="https://flexiacademy.com/assets/images/flexi-logo-2021.png" 
              alt="Flexi Academy Logo" 
-             width="120px">
+             width="120px"> 
+        </a>
       </div>
     </nav>
 
     <!-- Hero content -->
     <div class="container text-center d-flex flex-column justify-content-center align-items-center h-100 z-2 position-relative">
+      <a href="#searchSection" style="text-decoration: none;">
       <h1 class="display-3 fw-bold"><span style="color: rgb(2, 146, 183);"> Flexi </span> <span style="color: rgb(196, 75, 43);"> Graduates </span></h1>
+      </a>
     </div>
   </header>
 
   <!-- SEARCH BAR -->
-  <section class="py-4">
+  <section id="searchSection" class="py-4">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6" >
