@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Graduates</title>
+  <title>Graduates local</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -35,8 +35,8 @@
   <header 
     class="bg-dark text-white position-relative" 
     style="
-      background: url('https://via.placeholder.com/1200x400') center/cover no-repeat;
-      min-height: 300px;
+      background: url('https://media.licdn.com/dms/image/C5612AQGNlzF_-B2Ncg/article-cover_image-shrink_720_1280/0/1588723997239?e=2147483647&v=beta&t=r58vleJ94Y7U8fDQ1EudDpApo6n-z2vhkHZZUAFTNHg') center/cover no-repeat;
+      min-height: 350px;
     "
   >
     <!-- Dark overlay (optional) -->
@@ -53,7 +53,7 @@
 
     <!-- Hero content -->
     <div class="container text-center d-flex flex-column justify-content-center align-items-center h-100 z-2 position-relative">
-      <h1 class="display-3 fw-bold">This Page is <span style="color: red;"> UNDERDEVELOPMENT</h1>
+      <h1 class="display-3 fw-bold"><span style="color: rgb(2, 146, 183);"> Flexi </span> <span style="color: rgb(196, 75, 43);"> Graduates </span></h1>
     </div>
   </header>
 
@@ -61,16 +61,16 @@
   <section class="py-4">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6" >
           <div class="input-group">
-            <input 
+            <input style="background-color: rgba(2, 147, 183, 0.141);"
               type="text" 
               class="form-control" 
               id="searchInput"
               placeholder="Search graduates by name..."
               onkeyup="searchGraduates()"
             />
-            <span class="input-group-text">
+            <span style="background-color: rgba(2, 147, 183, 0.625);" class="input-group-text">
               <svg xmlns="http://www.w3.org/2000/svg" 
                    width="16" 
                    height="16" 
@@ -130,8 +130,6 @@
               <h3 id="modalStudentName"></h3>
               <p><strong>Citizenship:</strong> <span id="modalCitizenship"></span></p>
               <p><strong>Country of residence:</strong> <span id="modalResidence"></span></p>
-              <p><strong>Contact:</strong> <span id="modalContact"></span></p>
-              <p><strong>Date of Graduation:</strong> <span id="modalGradDate"></span></p>
               <p><strong>Program:</strong> <span id="modalProgram"></span></p>
               <p><strong>University:</strong> <span id="modalUniversity"></span></p>
               <p><strong>Country (University Location):</strong> <span id="modalCountry"></span></p>
